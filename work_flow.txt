@@ -1,0 +1,66 @@
+High level:
+
+Data is used in the views, data is transformed in the controller and data is stored in the models
+
+In detail:
+
+Create your app: rails new [app name]
+--[app name] will be the name of your application's main class so:
+[app name]::application.routes.draw do will be at the top of routes.rb
+
+
+Start your app: rails generate controller [controller name] index
+--creates a controller with name [controller name] and an index
+
+Write your controller "sub routes": 
+
+open app/controllers/[controller name]_controller.rb
+
+def [sub_route]
+end
+
+def create
+ @article = Article.new(article_params)
+ @article.save
+ redirect_to @article
+end
+
+private
+ def article_params
+   params.require(:article).permit(:title, :text)
+ end
+
+--notice this is a method name and anything on that page will be defined in
+this method.
+
+--Note: Every controller should have the CRUD methods: Create, Read, Update, Destroy 
+
+Create your view: app/views/[controller name]/[sub_route].html.erb
+--In this file you write straight html mixed with ruby on rails code.
+Example:
+
+<%=form_for :article, url: [ do |f| %> <-- ruby on rails code
+
+ <p>
+  <%= f.label :title %><br>
+  <%= f.text_field :title %>
+ </p>
+
+ <p>
+  <%= f.label :text %><br>
+  <%= f.text_area :text %>
+ </p>
+
+ <p>
+  <%= f.submit %>
+ </p>
+<% end %>
+
+Notice the use of variable names :article, :title, :text these matter for the controller as well.
+
+link your controller and route: rake routes
+
+Generate the model: rails generate model [captialized version of controller name] title:string text:text
+
+--Notice: these are the same variables used in the controller and the view
+

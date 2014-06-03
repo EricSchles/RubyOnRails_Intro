@@ -1,0 +1,18 @@
+Create your app: rails new [app name]
+--[app name] will be the name of your application's main class so:
+[app name]::application.routes.draw do will be at the top of routes.rb
+
+
+Start your app: rails generate controller [controller name] index
+--creates a controller with name [controller name] and an index
+
+Write your controller "sub routes": 
+
+open app/controllers/[controller name]_controller.rb
+
+def [sub_route]
+end
+
+--notice this is a method name and anything on that page will be defined in
+this method.
+Create your view: app/views/
